@@ -11,4 +11,3 @@
 # Install with go get
 go get github.com/brittonhayes/pkg
 ```
-go 
