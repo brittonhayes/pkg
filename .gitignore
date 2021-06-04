@@ -67,4 +67,4 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/go,osx,linux
-n
+n.idea
