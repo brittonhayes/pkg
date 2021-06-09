@@ -1,3 +1,8 @@
+// Package color provides simple utilities for
+// using colors based on their message significance.
+//
+// e.g. Success is light green, Error is bright red
+//
 package color
 
 type Color int
