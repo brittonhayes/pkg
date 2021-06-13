@@ -5,6 +5,11 @@
 //
 package color
 
+import (
+	"github.com/charmbracelet/lipgloss"
+	"github.com/muesli/termenv"
+)
+
 type Color int
 
 const (
@@ -26,42 +31,20 @@ const (
 	Warn
 )
 
-func (c Color) Hex() string {
-	return [...]string{"#00FFFF", "#B20000", "#198C19", "#FFFF00"}[c]
+// String returns an adaptive color to represent
+// info, error, warn, or success
+// based on the color theme of the terminal
+func (c Color) String() string {
+	var (
+		infoColor    = lipgloss.AdaptiveColor{Light: "#073b4c", Dark: "#4cc9f0"}
+		errorColor   = lipgloss.AdaptiveColor{Light: "#9d0208", Dark: "#f72585"}
+		warnColor    = lipgloss.AdaptiveColor{Light: "#e85d04", Dark: "#f48c06"}
+		successColor = lipgloss.AdaptiveColor{Light: "#469d89", Dark: "#06d6a0"}
+	)
+	if termenv.HasDarkBackground() {
+		return [...]string{infoColor.Dark, errorColor.Dark, warnColor.Dark, successColor.Dark}[c]
+	}
+
+	return [...]string{infoColor.Light, errorColor.Light, warnColor.Light, successColor.Light}[c]
 }
 
-type RGB struct {
-	Red   string
-	Green string
-	Blue  string
-}
-
-func (c Color) RGB() RGB {
-	return [...]RGB{
-		{
-			Red:   "0",
-			Green: "255",
-			Blue:  "255",
-		},
-		{
-			Red:   "178",
-			Green: "0",
-			Blue:  "0",
-		},
-		{
-			Red:   "178",
-			Green: "0",
-			Blue:  "0",
-		},
-		{
-			Red:   "25",
-			Green: "140",
-			Blue:  "25",
-		},
-		{
-			Red:   "255",
-			Green: "255",
-			Blue:  "0",
-		},
-	}[c]
-}
